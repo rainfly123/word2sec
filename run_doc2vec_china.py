@@ -204,10 +204,16 @@ print(test_corpus[:2])
 # with such small datasets.
 #
 model = gensim.models.doc2vec.Doc2Vec(vector_size=50, min_count=2, epochs=40)
+from gensim.test.utils import get_tmpfile
+import os
+fname = get_tmpfile("china_doc2vec_model")
+if os.path.exists(fname):
+    model = gensim.models.doc2vec.Doc2Vec.load(fname)
 
 ###############################################################################
 # Build a vocabulary
-model.build_vocab(train_corpus)
+if not os.path.exists(fname):
+    model.build_vocab(train_corpus)
 
 ###############################################################################
 # Essentially, the vocabulary is a dictionary (accessible via
@@ -223,6 +229,9 @@ model.build_vocab(train_corpus)
 # minutes, so use BLAS if you value your time.
 #
 model.train(train_corpus, total_examples=model.corpus_count, epochs=model.epochs)
+from gensim.test.utils import get_tmpfile
+fname = get_tmpfile("china_doc2vec_model")
+model.save(fname)
 
 ###############################################################################
 # Now, we can use the trained model to infer a vector for any piece of text
