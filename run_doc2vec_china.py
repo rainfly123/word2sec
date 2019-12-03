@@ -9,7 +9,9 @@ from gensim.test.utils import get_tmpfile
 import os
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-stopkeys = ['\r', '\n', '，', '。', '；', '！', ',', '.', ':', ';', ',', '：', '、', '《', '》', '?', '“', '”']
+stopkeys = ['nbsp', '$', '&', 'div', 'span', 'br', 'p',
+'\r', '\n', ',', '，', '.', '。', ';', '；', '！', ':', '：', '、', '《', '》', '？', '?',
+ '"', '“', '”']
 
 ###############################################################################
 # Doc2Vec is a :ref:`core_concepts_model` that represents each
