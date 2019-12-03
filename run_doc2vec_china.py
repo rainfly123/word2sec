@@ -159,6 +159,7 @@ def read_corpus(fname, tokens_only=False):
     with smart_open.open(fname, encoding="utf-8") as f:
         for i, line in enumerate(f):
             #tokens = gensim.utils.simple_preprocess(line)
+            line = line.decode('utf-8')
             words = jieba.cut(line)
             tokens = [w for w in words if w not in stopkeys]
             if tokens_only:
