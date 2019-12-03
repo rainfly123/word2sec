@@ -190,12 +190,13 @@ print(test_corpus[:2])
 # documents (a few hundred words). Adding training passes can sometimes help
 # with such small datasets.
 #
-model = gensim.models.doc2vec.Doc2Vec(vector_size=50, min_count=2, epochs=40)
 from gensim.test.utils import get_tmpfile
 import os
 fname = get_tmpfile("lee_doc2vec_model")
 if os.path.exists(fname):
     model = gensim.models.doc2vec.Doc2Vec.load(fname)
+else:
+    model = gensim.models.doc2vec.Doc2Vec(vector_size=48, min_count=2, epochs=40)
 
 ###############################################################################
 # Build a vocabulary
@@ -215,10 +216,11 @@ if not os.path.exists(fname):
 # If the BLAS library is not being used, this should take no more than 2
 # minutes, so use BLAS if you value your time.
 #
-model.train(train_corpus, total_examples=model.corpus_count, epochs=model.epochs)
-from gensim.test.utils import get_tmpfile
-fname = get_tmpfile("lee_doc2vec_model")
-model.save(fname)
+if not os.path.exists(fname):
+    model.train(train_corpus, total_examples=model.corpus_count, epochs=model.epochs)
+    from gensim.test.utils import get_tmpfile
+    fname = get_tmpfile("lee_doc2vec_model")
+    model.save(fname)
 
 ###############################################################################
 # Now, we can use the trained model to infer a vector for any piece of text
