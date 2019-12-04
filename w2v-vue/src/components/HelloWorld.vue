@@ -25,7 +25,7 @@
 </el-col>
 </el-row>
 
-<el-row v-for="item in items">
+<el-row v-for="(item,i) in items" :key="i">
 <el-col :offset="6" :span="12">
   <div>
   <p> 题目序号: &nbsp;{{item.id}}</p>
@@ -46,10 +46,7 @@ export default {
   data () {
     return {
      items: [
-             {id:1,similarity:30,text:'<h1>$a_{1}>0 $</span>'},
-             {id:1,similarity:30,text:'<h1>$a_{1}>0 $</span>'},
-             {id:1,similarity:30,text:'<h1>$a_{1}>0 $</span>'},
-             {id:1,similarity:30,text:'<h1>$a_{1}>0 $</span>'},
+{id:1,similarity:30,text:'<h1>$a_{1}>0 $</span>'} 
             ], 
      msg: 'Welcome to Your Vue.js App',
        input: '',
@@ -57,7 +54,30 @@ export default {
     }
   },
  methods:{
-    query(){console.log(this.input, this.similarity)}
+    query(){console.log(this.input, this.similarity);
+  	var that = this
+     var data = {
+          similarity: 60,
+          text: '函数我不知道'
+     }
+    this.items.push({id:1,similarity:30,text:'<h1>$a_{1}>0 $</span>'} )
+    /*
+    const qs = require('qs');
+    this.axios.post('https://eval.qctchina.top/api/w2v', qs.stringify(data)) 
+    .then(function (response) {
+         console.log(response.data);
+         let arr = []//新数组
+           response.data.forEach(item=>{  //需要渲染的数组
+            //执行你的操作，最后用放到arr中
+            arr.push(item)
+                })
+        that.items = arr //
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+    */
+    }
  }
 }
 </script>
