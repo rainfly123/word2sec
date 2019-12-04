@@ -19,6 +19,21 @@
  </el-col>
 </el-row>
 
+<el-row>
+<el-col :offset="6" :span="12">
+<el-divider></el-divider>
+</el-col>
+</el-row>
+
+<el-row>
+<el-col :offset="6" :span="12">
+  <div>
+  <p v-html="item"> </p>
+  </div>
+ </el-col>
+</el-row>
+
+
 </div>
 </template>
 
@@ -27,6 +42,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+     item: '<h1>$a_{1}>0 $</span>',
      msg: 'Welcome to Your Vue.js App',
        input: '',
        similarity:50
@@ -37,6 +53,5 @@ export default {
  }
 }
 </script>
-
 <style>
 </style>
