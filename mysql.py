@@ -47,5 +47,5 @@ def GetId(wid):
 
 
 if __name__ == "__main__":
-    #results = Get("outputs")
-    print GetId(9000)
+    results = Get()
+    #print GetId(9000)

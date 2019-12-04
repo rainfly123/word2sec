@@ -25,11 +25,14 @@
 </el-col>
 </el-row>
 
-<el-row>
+<el-row v-for="item in items">
 <el-col :offset="6" :span="12">
   <div>
-  <p v-html="item"> </p>
+  <p> 题目序号: &nbsp;{{item.id}}</p>
+  <p> 相似度: &nbsp; {{item.similarity}}</p>
+  <p v-html="item.text"> </p>
   </div>
+<el-divider></el-divider>
  </el-col>
 </el-row>
 
@@ -42,7 +45,12 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-     item: '<h1>$a_{1}>0 $</span>',
+     items: [
+             {id:1,similarity:30,text:'<h1>$a_{1}>0 $</span>'},
+             {id:1,similarity:30,text:'<h1>$a_{1}>0 $</span>'},
+             {id:1,similarity:30,text:'<h1>$a_{1}>0 $</span>'},
+             {id:1,similarity:30,text:'<h1>$a_{1}>0 $</span>'},
+            ], 
      msg: 'Welcome to Your Vue.js App',
        input: '',
        similarity:50
