@@ -4,17 +4,18 @@
 <el-row>
   <el-col :span="24"><div ><h2>
   英文语料推荐系统</h2></div></el-col>
+  <p>
+  <span style="color:gray"> —数据更新于:&nbsp;{{date}}—</span>
+  </p>
 </el-row>
 <el-row>
 <el-col :offset="6" :span="12">
   <div>
-  <br>
   <el-input  type="textarea"
   :rows="3" v-model="input" placeholder="请输入内容"></el-input>
   <br>
   <span class="demonstration">相似度阀值</span>
     <el-slider v-model="similarity"></el-slider>
-  <br>
   <el-button @click="query()" style="float:right;"type="primary">开始查询</el-button>
   </div>
  </el-col>
@@ -49,6 +50,7 @@ export default {
             ], 
        input: '',
        similarity:50,
+       date: '',
        btnFlag: false
     }
   },
@@ -98,6 +100,9 @@ export default {
 },
 mounted () {
   window.addEventListener('scroll', this.scrollToTop)
+  var date = new Date();
+  date.setTime(date.getTime()-24*60*60*1000);
+  this.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 },
 destroyed () {
   window.removeEventListener('scroll', this.scrollToTop)
