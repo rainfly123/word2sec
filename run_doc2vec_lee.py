@@ -40,7 +40,7 @@ def similar(test_corpus, similarity=0.5):
     #lee_train_file = os.path.join(test_data_dir, 'lee_background.cor')
     #train_corpus = list(__read_corpus(lee_train_file))
     #print " ".join(train_corpus[sims[0][0]].words)
-    return [{"id":i+1, "similarity":s} for i,s in sims if s >= similarity]
+    return [{"id":i, "similarity":round(s,4)} for i,s in sims if s >= similarity]
 
 if __name__ == '__main__':
     init_model()

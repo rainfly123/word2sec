@@ -55,7 +55,7 @@ def similar(test_corpus, similarity=0.5):
            
     inferred_vector = __model.infer_vector(tokens)
     sims = __model.docvecs.most_similar([inferred_vector], topn=len(__model.docvecs))
-    return [{"id":i+1, "similarity":s} for i,s in sims if s >= similarity]
+    return [{"id":i, "similarity":round(s, 4)} for i,s in sims if s >= similarity]
 
 if __name__ == "__main__":
     init_model()
