@@ -9,7 +9,7 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 __model = None
 
 def __read_corpus(fname, tokens_only=False):
-    with smart_open.open(fname, encoding="iso-8859-1") as f:
+    with smart_open.open(fname, encoding="utf-8") as f:
         for i, line in enumerate(f):
             tokens = gensim.utils.simple_preprocess(line)
             if tokens_only:
@@ -20,8 +20,7 @@ def __read_corpus(fname, tokens_only=False):
 
 def init_model():
     global __model
-    test_data_dir = os.path.join(gensim.__path__[0], 'test', 'test_data')
-    lee_train_file = os.path.join(test_data_dir, 'lee_background.cor')
+    lee_train_file = 'english'
     train_corpus = list(__read_corpus(lee_train_file))
     fname = get_tmpfile("lee_doc2vec_model")
     if os.path.exists(fname):
