@@ -5,16 +5,16 @@
   试题查重系统</h2></div></el-col>
 </el-row>
 <el-row>
-<el-col :offset="6" :span="12">
-  <div>
-  <br>
-  <el-input  type="textarea"
-  :rows="3" v-model="input" placeholder="请输入内容"></el-input>
-  <br>
-  <span class="demonstration">相似度阀值</span>
-    <el-slider v-model="similarity"></el-slider>
-  <br>
-  <el-button @click="query()" style="float:right;"type="primary">开始查询</el-button>
+  <el-col :offset="6" :span="12">
+    <div>
+    <br>
+    <el-input  type="textarea"
+    :rows="3" v-model="input" placeholder="请输入内容"></el-input>
+    <br>
+    <span class="demonstration">相似度阀值</span>
+      <el-slider v-model="similarity"></el-slider>
+    <br>
+    <el-button @click="query()" style="float:right;"type="primary">开始查询</el-button>
   </div>
  </el-col>
 </el-row>
@@ -29,7 +29,9 @@
   <div>
   <p> 题目序号: &nbsp;{{item.id}}</p>
   <p> 相似度: &nbsp; {{item.similarity}}</p>
-  <div v-html="convert(item.text)"> </div>
+  <div>
+    <Mathdown :content="item.text" :name="'item'+item.id"></Mathdown>
+  </div>
   </div>
 <el-divider></el-divider>
  </el-col>
@@ -40,10 +42,14 @@
 </template>
 
 <script>
+import Mathdown from './Mathdown.vue';
+
 export default {
   name: 'HelloWorld',
+  components: {Mathdown},
   data () {
     return {
+        question: '$1+1=3$,as $z_2+a^2$',
      items: [
             ], 
        input: '',
@@ -68,17 +74,6 @@ export default {
                 })
     })
     },
- convert(text) {
-      var formular = text.match(/(\$.+?\$)/g)
-      console.log(formular)
-      if (formular == null) return text
-      for ( var i = 0; i <formular.length; i++) {
-         var temp = formular[i].replace(/\$/g, '')
-         var d = MathJax.tex2chtml(temp ,{})
-         text = text.replace(/(\$.+?\$)/, d.innerHTML)
-      }
-      return text
-    }
 }
  }
 </script>
