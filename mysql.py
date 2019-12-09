@@ -20,7 +20,10 @@ def Get():
     cursor.execute(sql)
     mresults = cursor.fetchall()
     for x in mresults:
-        print x[0]
+        y = x[0]
+        y = y.replace("\r\n", " ")
+        y = y.replace("\n", " ")
+        print y
     cursor.close()
     conn.close()
     return 
